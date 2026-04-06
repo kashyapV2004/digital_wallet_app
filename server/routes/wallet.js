@@ -3,9 +3,9 @@ import { addMoney, getBalance, transactions, transferMoney } from "../controller
 import verifyToken from "../middleware/auth.js";
 const router = express.Router();
 
-router.get("/balance", getBalance);
+router.get("/balance", verifyToken, getBalance);
 router.post("/add", verifyToken, addMoney);
-router.post("transfer", verifyToken, transferMoney);
+router.post("/transfer", verifyToken, transferMoney);
 router.get("/transactions", verifyToken, transactions);
 
 export default router;
