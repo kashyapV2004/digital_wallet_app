@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 
 export default function Login() {
   const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -43,7 +42,9 @@ export default function Login() {
 
     try {
       const res = await API.post("/login", formData);
+
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
 
       toast.success("Login successful 🎉");
       navigate("/dashboard");

@@ -2,13 +2,13 @@ import jwt from "jsonwebtoken";
 
 const verifyToken = (req, res, next) => {
   try {
-    const token = req.headers["authorization"];
-    if (!token) return res.status(401).json({ error: "No Token Provided" });
-    jwt.verify(token, process.env.SECRET, (err, decoded) => {
-      if (err) return res.status(401).json({ error: "Invalid Token" });
-      req.userId = decode.id;
-      next();
-    });
+    const authHeader = req.headers.authorization;
+    if (!authHeader)
+      return res.status(401).json({ error: "No Token Provided" });
+    const token = authHeader.split(" ")[1];
+    const decode = jwt.verify(token, process.env.SECRET);
+    req.userId = decode.id;
+    next();
   } catch (err) {
     console.log("JWT ERROR:", err.message);
     if (err.name === "TokenExpiredError") {
@@ -18,4 +18,4 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-export default verifyToken;
+export default verifyToken

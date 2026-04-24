@@ -5,10 +5,10 @@ import Sidebar from "./components/Sidebar.jsx";
 import Login from "./pages/Login.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Footer from "./components/Footer.jsx";
-import Transactions from "./components/Transaction.jsx"
+import Transactions from "./components/Transaction.jsx";
 import React from "react";
 import Register from "./pages/Register.jsx";
-import Transfer from "./components/Transfer.jsx"
+import Transfer from "./components/Transfer.jsx";
 import { ToastContainer } from "react-toastify";
 
 function App() {
@@ -27,6 +27,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard/transfer" element={<Transfer />} />
           <Route path="/dashboard/transactions" element={<Transactions />} />
+          <Route path="/dashboard/add" element={<Dashboard />} />
         </Routes>
         <Footer />
       </div>

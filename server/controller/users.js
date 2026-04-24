@@ -13,11 +13,11 @@ export const loginController = async (req, res) => {
     const match = await bcrypt.compare(password, user.password);
     if (!match) return res.status(400).json({ message: "Invalid Password" });
     const token = jwt.sign({ id: user.id }, process.env.SECRET, {
-      expiresIn: "2h",
+      expiresIn: "2d",
     });
     res.json({
       token,
-      user: { id: user.id, user: user.name, email: user.email },
+      user: { id: user.id, username: user.name, email: user.email },
     });
   } catch (err) {}
 };
