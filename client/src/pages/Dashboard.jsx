@@ -42,7 +42,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-gray-100 p-6">
+    <div className="min-h-screen bg-linear-to-br from-indigo-100 to-gray-100 p-6">
       {/* Header */}
       <h1 className="text-3xl font-bold mb-6 text-gray-800">Welcome 👋</h1>
 
@@ -66,7 +66,7 @@ export default function Dashboard() {
         )}
 
         {/* Balance Card */}
-        <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-2xl shadow-lg p-6 flex flex-col justify-between">
+        <div className="bg-linear-to-r from-green-500 to-emerald-600 text-white rounded-2xl shadow-lg p-6 flex flex-col justify-between">
           <h2 className="text-lg font-semibold mb-2">💰 Wallet Balance</h2>
 
           {loading ? (

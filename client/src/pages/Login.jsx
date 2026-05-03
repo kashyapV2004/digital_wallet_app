@@ -2,8 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../api.js";
 import { toast } from "react-toastify";
+import { useUser } from "../context/userContext.jsx";
 
 export default function Login() {
+  const {setCurrentUser} = useUser();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -42,10 +44,10 @@ export default function Login() {
 
     try {
       const res = await API.post("/login", formData);
-
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-
+      const {token, user} = res.data;
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+      setCurrentUser(user);
       toast.success("Login successful 🎉");
       navigate("/dashboard");
     } catch (err) {

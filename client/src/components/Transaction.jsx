@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
 import API from "../api";
+import { useUser } from "../context/userContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Transactions() {
+  const { currentUser } = useUser();
+  const navigate = useNavigate();
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
         const res = await API.get("/dashboard/transactions");
-        setTransactions(res.data.data || res.data);
+        setTransactions(res.data);
       } catch (err) {
         console.log(err);
       }
@@ -24,6 +28,7 @@ export default function Transactions() {
         <table className="w-full text-left">
           <thead className="bg-gray-200">
             <tr>
+              <th className="p-3">Id</th>
               <th className="p-3">Type</th>
               <th className="p-3">Amount</th>
               <th className="p-3">Date</th>
@@ -33,8 +38,9 @@ export default function Transactions() {
           <tbody>
             {transactions.map((t, index) => (
               <tr key={index} className="border-t">
+                <td className="p-3">{t.id}</td>
                 <td className="p-3">
-                  {t.type === "DEBIT" ? (
+                  {t.Type === "debit" ? (
                     <span className="text-red-500">Debit</span>
                   ) : (
                     <span className="text-green-500">Credit</span>

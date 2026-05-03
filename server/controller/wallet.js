@@ -73,8 +73,8 @@ export const transactions = async (req, res) => {
   try {
     const user_id = req.userId;
     const [rows] = await db.query(
-      "select * from transactions where sender_id = ? or receiver_id = ? order by created_at DESC",
-      [user_id, user_id],
+      "select *, IF(sender_id = ?, 'debit', 'credit') as Type from transactions where sender_id = ? or receiver_id = ? order by created_at DESC",
+      [user_id, user_id, user_id],
     );
     res.json(rows);
   } catch (err) {
